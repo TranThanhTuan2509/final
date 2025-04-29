@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <world name="default">
+  
+    <!-- Physics Settings (optional) -->
+    <physics type="ode">
+      <gravity>0 0 -9.8</gravity>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+
+    <!-- Ground Plane -->
+    <model name="ground_plane">
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1.0</ambient>
+            <diffuse>0.8 0.8 0.8 1.0</diffuse>
+            <specular>0.0 0.0 0.0 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Add your building model -->
+    <include>
+      <uri>model://map3</uri> <!-- Reference to the model in Gazebo's model database -->
+      <pose>0 0 0 0 0 0</pose> <!-- Position of the model in the world -->
+    </include>
+
+  </world>
+</sdf>
+

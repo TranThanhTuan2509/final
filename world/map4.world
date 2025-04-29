@@ -1,0 +1,119 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <scene>
+      <ambient>0.5 0.5 0.5 1</ambient>
+      <background>0.5 0.5 0.5 1</background>
+      <shadows>0</shadows>
+    </scene>
+    <physics type='ode'>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>10</iters>
+          <sor>1.3</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>10</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <light name='directional_light_1' type='directional'>
+      <pose>0 20 20 0.1 0.1 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <attenuation>
+        <range>300</range>
+      </attenuation>
+      <direction>0.1 0.1 -1</direction>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='small_indoor_scenario'>
+      <link name='120m_landscape_smooth_tri_link'>
+        <pose>0 0 0 0 -0 0</pose>
+        <collision name='small_indoor_scenario_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://small_indoor_scenario.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='small_indoor_scenario'>
+          <geometry>
+            <mesh>
+              <uri>model://small_indoor_scenario.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <cast_shadows>0</cast_shadows>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+    </model>
+    <gravity>0 0 -9.81</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <state world_name='default'>
+      <sim_time>59 28000000</sim_time>
+      <real_time>59 157927446</real_time>
+      <wall_time>1745908920 823770348</wall_time>
+      <iterations>59028</iterations>
+      <model name='small_indoor_scenario'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='120m_landscape_smooth_tri_link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='directional_light_1'>
+        <pose>0 20 20 0.1 0.1 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>19.3998 13.204 16.5038 0 0.625797 -2.45499</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

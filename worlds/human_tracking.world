@@ -1,0 +1,27 @@
+<world name="default">
+  <include>
+    <uri>model://sun</uri>
+  </include>
+
+  <actor name="walking_human">
+    <pose>0 0 0 0 0 0</pose>
+    <skin>
+      <filename>model://walking_person/meshes/walking.dae</filename>
+      <scale>1.0</scale>
+    </skin>
+    <animation name="walk" filename="model://walking_person/meshes/walking.dae" scale="1.0"/>
+    <script>
+      <trajectory id="0" type="walking">
+        <waypoint>
+          <time>0.0</time>
+          <pose>0 0 1.0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>5.0</time>
+          <pose>5 0 1.0 0 0 0</pose>
+        </waypoint>
+      </trajectory>
+    </script>
+  </actor>
+</world>
+
