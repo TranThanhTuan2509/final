@@ -15,7 +15,8 @@ def checkpoint(target):
 
 # Load the trained network "MobileNetSSD"
 global network 
-network = cv2.dnn.readNetFromCaffe(checkpoint('MobileNetSSD_deploy.prototxt.txt'), checkpoint('MobileNetSSD_deploy.caffemodel'))
+network = cv2.dnn.readNetFromCaffe('/home/tuan/catkin_ws/src/final/trained_network/MobileNetSSD_deploy.prototxt.txt', 
+                                   '/home/tuan/catkin_ws/src/final/trained_network/MobileNetSSD_deploy.caffemodel')
 
 class CVControl:
     def __init__(self):
@@ -37,10 +38,10 @@ class CVControl:
 
         # Proportional control variables
         K_rotation = 0.009
-        K_velocity = 0.000020
-        max_velocity = 0.25
-        desired_area = 80000  # Desired area for maintaining distance
-        slow_velocity = 0.1   # Slow forward speed when person is far
+        K_velocity = 0.000045
+        max_velocity = 1.5
+        desired_area = 70000  # Desired area for maintaining distance
+        slow_velocity = 0.2   # Slow forward speed when person is far
         search_rotation_speed = 0.5  # Rotation speed when searching for person
 
         # Initialize velocities
@@ -89,7 +90,7 @@ class CVControl:
                 label = "{}: {:.2f}%".format('human', confidence * 100)
                 cv2.rectangle(frame, (startX, startY), (endX, endY), [0,0,255], 2)
                 y = startY - 15 if startY - 15 > 15 else startY + 15
-                cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [0,0,255], 2)
+                cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.05, [0,0,255], 2)
 
                 if area_box > area_biggest_detection:
                     area_biggest_detection = area_box
@@ -106,7 +107,7 @@ class CVControl:
             if area_biggest_detection > 10000:
                 # Adjust distance if person is close enough
                 v = K_velocity * (desired_area - area_biggest_detection)
-                v = np.clip(v, -max_velocity, max_velocity)
+                v = max(0, np.clip(v, -max_velocity, max_velocity))  # Prevent backward movement
             else:
                 # Move slowly towards the person if they are far
                 v = slow_velocity
