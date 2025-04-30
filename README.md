@@ -1,5 +1,5 @@
 ## Package
-install this requirement directly only for downloading python libs
+install this requirement directly is only for python libs
 ```bash
 pip install -r requirements.txt
 ```  
